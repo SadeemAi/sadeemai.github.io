@@ -714,3 +714,6 @@ em{font-style:normal}
 .ht-word{background:linear-gradient(180deg,#0d1117 35%,#4b5563 115%); -webkit-background-clip:text; background-clip:text}
 .cls-box{box-shadow:0 0 0 999px rgba(247,245,240,.55)}
 .pv-img img.op-right{object-position:85% top}
+
+.case-links{margin-top:18px}
+.case-links a{font-size:16px}
