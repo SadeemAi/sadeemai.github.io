@@ -669,3 +669,48 @@ em{font-style:normal}
   .cls-box,.typing i,.status i,.hud-live i,.scroll-cue span{animation:none !important}
   .story-on .step{opacity:1}
 }
+
+/* ==========================================================================
+   Light theme: the dark chapters now sit on warm off-white. Tokens first,
+   then the few rules that hard-coded a dark surface.
+   ========================================================================== */
+:root{
+  --bg:#f7f5f0; --bg-2:#f1eee8; --surface:#ffffff; --surface-2:#f4f1ec;
+  --line:rgba(13,17,23,.09); --line-2:rgba(13,17,23,.16);
+  --text:#3a4250; --muted:#6b7280; --white:#0d1117;
+  --accent:#0f766e; --accent-2:#0d9488; --accent-ink:#ffffff; --warm:#c2410c;
+  color-scheme:light;
+}
+.btn-ghost:hover{border-color:rgba(13,17,23,.35)}
+.nav-inner{background:rgba(247,245,240,.72)}
+.nav.is-scrolled .nav-inner{background:rgba(247,245,240,.9); box-shadow:0 10px 40px -18px rgba(13,17,23,.25)}
+.nav-pill{background:rgba(13,17,23,.07)}
+.hero{background:radial-gradient(60% 50% at 78% 38%, rgba(13,148,136,.10), transparent 70%), radial-gradient(40% 40% at 12% 90%, rgba(194,65,12,.06), transparent 70%), var(--bg)}
+.status{color:#0f766e; background:rgba(13,148,136,.08); border-color:rgba(13,148,136,.28)}
+.status i{background:#0d9488}
+.hud{background:rgba(255,255,255,.75); box-shadow:0 20px 50px -30px rgba(13,17,23,.3)}
+.feat,.tags span,.flow li,.copyrow code{background:rgba(13,17,23,.035)}
+.flow li{color:var(--p-ink)}
+.lk-train{background:rgba(13,17,23,.06)}
+.eco-links line{stroke:rgba(13,17,23,.10)}
+.eco-links line.on{stroke:rgba(194,65,12,.55)}
+.eco-node.exploring circle.dot{stroke:rgba(13,17,23,.4)}
+.pill{background:rgba(194,65,12,.08)}
+.pv-img::after{background:linear-gradient(180deg,transparent 60%,rgba(13,17,23,.18))}
+.pc-idx{background:rgba(255,255,255,.85)}
+.cls-grid i{background:linear-gradient(135deg,rgba(13,148,136,.14),rgba(194,65,12,.08))}
+.cls-grid i:nth-child(3n+2){background:linear-gradient(135deg,rgba(13,17,23,.05),rgba(13,148,136,.06))}
+.cls-grid i:nth-child(4n){background:linear-gradient(135deg,rgba(194,65,12,.14),rgba(13,17,23,.03))}
+.stage-frame{background:#ffffff; box-shadow:0 50px 100px -50px rgba(13,17,23,.35)}
+.probs i{background:linear-gradient(90deg,var(--ca) calc(var(--v) * 1%),rgba(13,17,23,.07) 0)}
+.lightbox::backdrop{background:rgba(247,245,240,.88)}
+::selection{background:#99f6e4; color:#0d1117}
+
+/* project cards with two links (live demo + code) */
+.pc-links{display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:auto}
+.pc-links a{font-weight:600; font-size:14.5px; text-decoration:none; color:var(--accent)}
+.pc-links a:hover{text-decoration:underline; text-underline-offset:3px}
+.pc-links a.ghost{color:var(--muted)}
+.ht-word{background:linear-gradient(180deg,#0d1117 35%,#4b5563 115%); -webkit-background-clip:text; background-clip:text}
+.cls-box{box-shadow:0 0 0 999px rgba(247,245,240,.55)}
+.pv-img img.op-right{object-position:85% top}

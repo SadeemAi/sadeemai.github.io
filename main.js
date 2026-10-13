@@ -285,18 +285,18 @@
       const a = parts[i];
       for (let j = i + 1; j < parts.length; j++) {
         const b = parts[j], dx = a.x - b.x, dy = a.y - b.y, dd = dx * dx + dy * dy;
-        if (dd < link2) { ctx.strokeStyle = `rgba(255,255,255,${(1 - dd / link2) * .07})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+        if (dd < link2) { ctx.strokeStyle = `rgba(13,17,23,${(1 - dd / link2) * .10})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
       }
       // particle → landmark "attention" lines
       for (const k of JOINTS) {
         const dx = a.x - P[k][0], dy = a.y - P[k][1], dd = dx * dx + dy * dy;
-        if (dd < 14400) { ctx.strokeStyle = `rgba(94,234,212,${(1 - dd / 14400) * .28})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(P[k][0], P[k][1]); ctx.stroke(); }
+        if (dd < 14400) { ctx.strokeStyle = `rgba(13,148,136,${(1 - dd / 14400) * .28})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(P[k][0], P[k][1]); ctx.stroke(); }
       }
       if (mouse.on) {
         const dx = a.x - mouse.x, dy = a.y - mouse.y, dd = dx * dx + dy * dy;
-        if (dd < 32400) { ctx.strokeStyle = `rgba(255,158,122,${(1 - dd / 32400) * .3})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
+        if (dd < 32400) { ctx.strokeStyle = `rgba(194,65,12,${(1 - dd / 32400) * .3})`; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke(); }
       }
-      ctx.fillStyle = 'rgba(214,226,238,.45)';
+      ctx.fillStyle = 'rgba(13,17,23,.28)';
       ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill();
     }
 
@@ -305,7 +305,7 @@
     for (const k of JOINTS) { x0 = Math.min(x0, P[k][0]); y0 = Math.min(y0, P[k][1]); x1 = Math.max(x1, P[k][0]); y1 = Math.max(y1, P[k][1]); }
     const pad = fig.h * .07; x0 -= pad; y0 -= pad * 1.3; x1 += pad; y1 += pad * .6;
     const c = Math.min(22, (x1 - x0) * .18);
-    ctx.strokeStyle = 'rgba(94,234,212,.55)'; ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(13,148,136,.55)'; ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(x0, y0 + c); ctx.lineTo(x0, y0); ctx.lineTo(x0 + c, y0);
     ctx.moveTo(x1 - c, y0); ctx.lineTo(x1, y0); ctx.lineTo(x1, y0 + c);
@@ -315,24 +315,24 @@
     ctx.font = '500 10.5px "Geist Mono", ui-monospace, monospace';
     const tag = `person ${pMove.toFixed(2)} · ${move}`;
     const tw = ctx.measureText(tag).width + 12;
-    ctx.fillStyle = 'rgba(94,234,212,.92)'; ctx.fillRect(x0, y0 - 20, tw, 17);
-    ctx.fillStyle = '#03211d'; ctx.fillText(tag, x0 + 6, y0 - 8);
+    ctx.fillStyle = 'rgba(13,148,136,.92)'; ctx.fillRect(x0, y0 - 20, tw, 17);
+    ctx.fillStyle = '#ffffff'; ctx.fillText(tag, x0 + 6, y0 - 8);
 
     // skeleton
     ctx.lineCap = 'round';
     const neck = [(P.shL[0] + P.shR[0]) / 2, (P.shL[1] + P.shR[1]) / 2];
-    ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(94,234,212,.45)'; ctx.lineWidth = 1.5;
+    ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(13,148,136,.45)'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(P.nose[0], P.nose[1]); ctx.lineTo(neck[0], neck[1]); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.strokeStyle = 'rgba(94,234,212,.85)'; ctx.lineWidth = 2.4;
+    ctx.strokeStyle = 'rgba(13,148,136,.85)'; ctx.lineWidth = 2.4;
     ctx.beginPath();
     for (const [a, b] of BONES) { ctx.moveTo(P[a][0], P[a][1]); ctx.lineTo(P[b][0], P[b][1]); }
     ctx.stroke();
     for (const k of JOINTS) {
       const small = /eye|ear|nose/.test(k);
-      ctx.fillStyle = 'rgba(94,234,212,.18)';
+      ctx.fillStyle = 'rgba(13,148,136,.18)';
       ctx.beginPath(); ctx.arc(P[k][0], P[k][1], small ? 5 : 8, 0, 6.283); ctx.fill();
-      ctx.fillStyle = k === 'wrL' || k === 'wrR' || k === 'anL' || k === 'anR' ? '#ff9e7a' : '#eafffb';
+      ctx.fillStyle = k === 'wrL' || k === 'wrR' || k === 'anL' || k === 'anR' ? '#c2410c' : '#0f766e';
       ctx.beginPath(); ctx.arc(P[k][0], P[k][1], small ? 2 : 3.2, 0, 6.283); ctx.fill();
     }
   }
