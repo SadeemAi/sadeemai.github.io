@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head>
+    
+
+    
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff8ee">
+    <link rel="icon" href="assets/655de1fb3f92.svg" type="image/svg+xml">
+    <title>رِسام · RISSAM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style type="text/css" data-vite-dev-id="C:/Users/ssade/Downloads/projcts/رسام - resam/frontend/src/styles.css">:root {
+  --paper: #fff8ee;
+  --paper-2: #fdeedb;
+  --card: #ffffff;
+  --card-2: #fffaf3;
+  --ink: #2a2420;
+  --ink-2: #6e6258;
+  --ink-3: #a3968a;
+  --line: rgb(42 36 32 / 0.1);
+  --line-2: rgb(42 36 32 / 0.18);
+  --coral: #f2665a;
+  --coral-soft: #fde4e0;
+  --sun: #f7b731;
+  --sun-soft: #fdf0cc;
+  --sky: #4fa3e0;
+  --sky-soft: #dcedfa;
+  --leaf: #44a663;
+  --leaf-soft: #dcf1e2;
+  --plum: #8e6ccf;
+  --plum-soft: #ebe3f8;
+  --shadow: 0 1px 0 rgb(42 36 32 / 0.05), 0 14px 32px -16px rgb(120 80 40 / 0.28);
+  --shadow-lg: 0 2px 0 rgb(42 36 32 / 0.05), 0 28px 60px -24px rgb(120 80 40 / 0.38);
+  --r: 22px;
+  --r-wobble: 24px 18px 26px 20px / 20px 26px 18px 24px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --display: "Baloo Bhaijaan 2", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --body: "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1a1613;
+    --paper-2: #221d19;
+    --card: #26211c;
+    --card-2: #2c2620;
+    --ink: #f6eee4;
+    --ink-2: #c4b6a8;
+    --ink-3: #8b7e72;
+    --line: rgb(246 238 228 / 0.1);
+    --line-2: rgb(246 238 228 / 0.18);
+    --coral-soft: rgb(242 102 90 / 0.18);
+    --sun-soft: rgb(247 183 49 / 0.16);
+    --sky-soft: rgb(79 163 224 / 0.18);
+    --leaf-soft: rgb(68 166 99 / 0.18);
+    --plum-soft: rgb(142 108 207 / 0.2);
+    --shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 14px 32px -16px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 2px 0 rgb(0 0 0 / 0.3), 0 28px 60px -24px rgb(0 0 0 / 0.7);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--body); color: var(--ink); background: var(--paper); line-height: 1.7; min-height: 100vh;
+  background-image: radial-gradient(rgb(160 120 80 / 0.07) 1px, transparent 1.2px); background-size: 22px 22px;
+}
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.25; margin: 0; letter-spacing: -0.005em; }
+h1 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.08rem; }
+p { margin: 0; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input, select, textarea { font: inherit; color: inherit; }
+::selection { background: var(--sun-soft); }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; border-radius: 8px; }
+
+.muted { color: var(--ink-2); }
+.faint { color: var(--ink-3); }
+.small { font-size: 0.85rem; }
+.tiny { font-size: 0.75rem; }
+.row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.between { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.stack { display: grid; gap: 1rem; }
+.stack-lg { display: grid; gap: 1.6rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+.plain { unicode-bidi: plaintext; }
+[dir="rtl"] .icon.dir { transform: scaleX(-1); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Crayon underline under section titles */
+.scribble { position: relative; display: inline-block; padding-bottom: 0.3rem; }
+.scribble::after {
+  content: ""; position: absolute; inset-inline: -4px; bottom: -2px; height: 10px; opacity: 0.85;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8c30-6 55-5 80-2s60 4 80-1 30-3 36 0' fill='none' stroke='%23f7b731' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+.scribble.coral::after { filter: hue-rotate(-40deg) saturate(1.4); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; border: 2px solid transparent; cursor: pointer;
+  padding: 0.6rem 1.15rem; border-radius: 999px; font-weight: 600; text-decoration: none; white-space: nowrap; background: none;
+  transition: transform 0.2s var(--ease), box-shadow 0.25s, background 0.2s, border-color 0.2s;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:not(:disabled):active { transform: scale(0.96); }
+.btn.primary { background: var(--coral); color: #fff; box-shadow: 0 4px 0 #c94d43, 0 10px 22px -10px rgb(242 102 90 / 0.8); }
+.btn.primary:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 0 #c94d43, 0 16px 26px -12px rgb(242 102 90 / 0.8); }
+.btn.primary:not(:disabled):active { transform: translateY(2px); box-shadow: 0 2px 0 #c94d43; }
+.btn.secondary { background: var(--card); border-color: var(--line-2); }
+.btn.secondary:not(:disabled):hover { border-color: var(--ink-3); transform: translateY(-1px); }
+.btn.ghost { color: var(--ink-2); padding-inline: 0.7rem; }
+.btn.ghost:hover { background: var(--paper-2); color: var(--ink); }
+.btn.danger { background: var(--coral-soft); color: #c43b30; }
+.btn.danger:hover { background: var(--coral); color: #fff; }
+.btn.sm { padding: 0.35rem 0.8rem; font-size: 0.85rem; }
+.btn.lg { padding: 0.85rem 1.7rem; font-size: 1.08rem; }
+.btn.icon { padding: 0.5rem; border-radius: 12px; }
+.link { background: none; border: none; padding: 0; color: var(--sky); cursor: pointer; font-weight: 600; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+
+/* Cards & chips */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 1.25rem; }
+.card.wobble { border-radius: var(--r-wobble); }
+.card.flat { box-shadow: none; }
+.card.tinted { background: var(--card-2); }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.15rem 0.65rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+  background: var(--paper-2); color: var(--ink-2); white-space: nowrap;
+}
+.chip.sun { background: var(--sun-soft); color: #9a6a00; }
+.chip.sky { background: var(--sky-soft); color: #23679b; }
+.chip.leaf { background: var(--leaf-soft); color: #23703d; }
+.chip.coral { background: var(--coral-soft); color: #b8392f; }
+.chip.plum { background: var(--plum-soft); color: #6a4aae; }
+@media (prefers-color-scheme: dark) {
+  .chip.sun { color: var(--sun); } .chip.sky { color: var(--sky); } .chip.leaf { color: #6fd18f; } .chip.coral { color: #ff8f84; } .chip.plum { color: #b59cf0; }
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+/* Forms */
+.field { display: grid; gap: 0.35rem; }
+.field > span { font-size: 0.88rem; font-weight: 600; }
+.input, .select, .textarea {
+  width: 100%; padding: 0.7rem 0.9rem; border-radius: 14px; border: 2px solid var(--line-2); background: var(--card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--sky); box-shadow: 0 0 0 4px var(--sky-soft); }
+.textarea { resize: vertical; min-height: 90px; }
+.check { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; padding: 0.7rem 0.85rem; border-radius: 14px; border: 2px solid var(--line); }
+.check:has(input:checked) { border-color: var(--leaf); background: var(--leaf-soft); }
+.check input { width: 18px; height: 18px; margin-top: 0.25rem; accent-color: var(--leaf); flex-shrink: 0; }
+.seg { display: inline-flex; background: var(--paper-2); border-radius: 999px; padding: 4px; gap: 2px; }
+.seg button { border: none; background: none; padding: 0.4rem 0.95rem; border-radius: 999px; cursor: pointer; font-weight: 600; color: var(--ink-2); }
+.seg button.on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+
+.banner { padding: 0.75rem 1rem; border-radius: 16px; display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; }
+.banner.error { background: var(--coral-soft); color: #b8392f; }
+.banner.info { background: var(--sky-soft); color: #23679b; }
+.banner.ok { background: var(--leaf-soft); color: #23703d; }
+@media (prefers-color-scheme: dark) { .banner.error { color: #ff8f84; } .banner.info { color: var(--sky); } .banner.ok { color: #6fd18f; } }
+
+/* App shell */
+.shell { display: grid; grid-template-columns: 264px minmax(0, 1fr); min-height: 100vh; }
+.side {
+  position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 1.2rem; padding: 1.4rem 1rem;
+  border-inline-end: 1px solid var(--line); background: rgb(255 248 238 / 0.7); backdrop-filter: blur(10px);
+}
+@media (prefers-color-scheme: dark) { .side { background: rgb(26 22 19 / 0.75); } }
+.brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; padding-inline: 0.4rem; }
+.brand strong { font-family: var(--display); font-size: 1.55rem; line-height: 1; }
+.brand small { display: block; color: var(--ink-3); font-size: 0.72rem; margin-top: 0.15rem; }
+.nav { display: grid; gap: 0.2rem; }
+.nav a {
+  display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0.8rem; border-radius: 14px; text-decoration: none; color: var(--ink-2);
+  font-weight: 600; transition: background 0.2s, color 0.2s;
+}
+.nav a:hover { background: var(--paper-2); color: var(--ink); }
+.nav a.active { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+.nav a.active .icon { color: var(--coral); }
+.nav .count { margin-inline-start: auto; background: var(--coral); color: #fff; border-radius: 999px; font-size: 0.72rem; padding: 0 0.45rem; }
+.side-kids { display: grid; gap: 0.2rem; overflow-y: auto; }
+.side-kids .label { font-size: 0.75rem; color: var(--ink-3); padding: 0 0.8rem 0.2rem; font-weight: 600; }
+.side-kid { display: flex; align-items: center; gap: 0.6rem; padding: 0.45rem 0.7rem; border-radius: 14px; text-decoration: none; color: var(--ink-2); }
+.side-kid:hover, .side-kid.active { background: var(--paper-2); color: var(--ink); }
+.side-foot { margin-top: auto; display: grid; gap: 0.6rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+.who { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
+.who div { min-width: 0; }
+.who strong, .who span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.main { padding: 2rem clamp(1rem, 3vw, 2.6rem) 4rem; max-width: 1240px; width: 100%; margin: 0 auto; animation: page-in 0.5s var(--ease) both; }
+.page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.page-head p { margin-top: 0.35rem; }
+.mobile-bar, .bottom-nav { display: none; }
+
+/* Avatars */
+.avatar {
+  --h: 24; width: 42px; height: 42px; border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; display: grid; place-items: center; flex-shrink: 0;
+  background: hsl(var(--h) 85% 88%); color: hsl(var(--h) 60% 32%); font-family: var(--display); font-weight: 800; font-size: 1.15rem;
+}
+.avatar.lg { width: 76px; height: 76px; font-size: 2rem; }
+.avatar.sm { width: 30px; height: 30px; font-size: 0.85rem; }
+@media (prefers-color-scheme: dark) { .avatar { background: hsl(var(--h) 45% 26%); color: hsl(var(--h) 85% 82%); } }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.9rem; }
+.stat { padding: 1rem 1.1rem; border-radius: var(--r-wobble); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); animation: rise 0.6s var(--ease) both; }
+.stat strong { display: block; font-family: var(--display); font-size: 2rem; line-height: 1.1; }
+.stat span { color: var(--ink-2); font-size: 0.85rem; font-weight: 600; }
+.stat:nth-child(1) strong { color: var(--coral); } .stat:nth-child(2) strong { color: var(--sky); } .stat:nth-child(3) strong { color: var(--plum); }
+.stat:nth-child(4) strong { color: #d8930c; } .stat:nth-child(5) strong { color: var(--leaf); }
+.stats > :nth-child(2) { animation-delay: 0.05s; } .stats > :nth-child(3) { animation-delay: 0.1s; } .stats > :nth-child(4) { animation-delay: 0.15s; } .stats > :nth-child(5) { animation-delay: 0.2s; }
+
+/* Child cards */
+.kids { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+.kid-card {
+  display: grid; gap: 0.8rem; padding: 1.1rem; border-radius: var(--r-wobble); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow);
+  text-decoration: none; transition: transform 0.35s var(--ease), box-shadow 0.35s; animation: rise 0.55s var(--ease) both;
+}
+.kid-card:hover { transform: translateY(-4px) rotate(-0.4deg); box-shadow: var(--shadow-lg); }
+.kid-card .thumb { aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: var(--paper-2); }
+.kid-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.kid-card.add { place-items: center; align-content: center; min-height: 240px; border: 2px dashed var(--line-2); box-shadow: none; background: transparent; color: var(--ink-2); cursor: pointer; }
+.kid-card.add:hover { border-color: var(--coral); color: var(--coral); }
+
+/* Drawing cards */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.1rem; }
+.d-card {
+  display: grid; text-decoration: none; background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s; animation: rise 0.55s var(--ease) both;
+}
+.d-card:nth-child(odd):hover { transform: translateY(-5px) rotate(-0.8deg); }
+.d-card:nth-child(even):hover { transform: translateY(-5px) rotate(0.8deg); }
+.d-card:hover { box-shadow: var(--shadow-lg); }
+.d-card .pic { aspect-ratio: 4 / 3; background: var(--paper-2); position: relative; }
+.d-card .pic img { width: 100%; height: 100%; object-fit: cover; }
+.d-card .pic .chip { position: absolute; top: 0.6rem; inset-inline-start: 0.6rem; }
+.d-card .meta { padding: 0.8rem 0.95rem 0.95rem; display: grid; gap: 0.35rem; }
+.d-card .meta strong { font-family: var(--display); font-size: 1.1rem; }
+.gallery > :nth-child(2) { animation-delay: 0.04s; } .gallery > :nth-child(3) { animation-delay: 0.08s; } .gallery > :nth-child(4) { animation-delay: 0.12s; } .gallery > :nth-child(n + 5) { animation-delay: 0.16s; }
+
+/* Profile header */
+.profile { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
+.tabs { display: flex; gap: 0.3rem; overflow-x: auto; padding: 0.3rem; background: var(--paper-2); border-radius: 999px; margin: 1.4rem 0; width: fit-content; max-width: 100%; }
+.tabs a, .tabs button { border: none; background: none; padding: 0.5rem 1.05rem; border-radius: 999px; cursor: pointer; font-weight: 600; color: var(--ink-2); text-decoration: none; white-space: nowrap; }
+.tabs .on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+
+/* Charts */
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 140px; padding-top: 0.5rem; }
+.bars .bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; height: 100%; }
+.bars .bar i { width: 100%; max-width: 30px; border-radius: 10px 10px 4px 4px; background: var(--sky); transform-origin: bottom; animation: grow-y 0.9s var(--ease) both; min-height: 4px; }
+.bars .bar:nth-child(3n) i { background: var(--coral); } .bars .bar:nth-child(3n + 1) i { background: var(--sun); }
+.bars .bar span { font-size: 0.66rem; color: var(--ink-3); }
+.hbar { display: grid; grid-template-columns: 110px 1fr 28px; gap: 0.6rem; align-items: center; font-size: 0.88rem; margin: 0.35rem 0; }
+.hbar .track { height: 12px; border-radius: 999px; background: var(--paper-2); overflow: hidden; }
+.hbar .track i { display: block; height: 100%; border-radius: 999px; background: var(--leaf); transform-origin: inline-start; animation: grow-x 1s var(--ease) both; }
+[dir="rtl"] .hbar .track i { transform-origin: right; } [dir="ltr"] .hbar .track i { transform-origin: left; }
+.hbar:nth-child(2) .track i { background: var(--sky); } .hbar:nth-child(3) .track i { background: var(--plum); } .hbar:nth-child(4) .track i { background: var(--sun); } .hbar:nth-child(5) .track i { background: var(--coral); }
+
+/* Observations */
+.obs { display: grid; gap: 0.5rem; padding: 0.95rem 1rem; border-radius: 16px; background: var(--card-2); border: 1px solid var(--line); animation: rise 0.5s var(--ease) both; }
+.obs .text { unicode-bidi: plaintext; }
+.obs.rejected { opacity: 0.5; }
+.obs.rejected .text { text-decoration: line-through; }
+.quote {
+  font-family: var(--display); font-size: 1.15rem; padding: 0.8rem 1.1rem; border-radius: 18px; background: var(--sun-soft); position: relative; unicode-bidi: plaintext;
+}
+.quote::before { content: "“"; position: absolute; top: -0.6rem; inset-inline-start: 0.6rem; font-size: 2.6rem; color: var(--sun); line-height: 1; }
+
+/* Report */
+.report-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.sticky { position: sticky; top: 1.2rem; }
+.drawing-frame { position: relative; border-radius: 20px; overflow: hidden; background: var(--paper-2); box-shadow: var(--shadow-lg); border: 8px solid var(--card); }
+.drawing-frame img { width: 100%; height: auto; }
+.bbox {
+  position: absolute; border: 3px dashed var(--coral); border-radius: 12px; background: rgb(242 102 90 / 0.08); transition: opacity 0.25s, background 0.2s;
+  animation: fade 0.4s var(--ease) both;
+}
+.bbox span {
+  position: absolute; top: -0.85rem; inset-inline-start: 0.4rem; background: var(--coral); color: #fff; font-size: 0.72rem; font-weight: 700;
+  padding: 0 0.45rem; border-radius: 999px; white-space: nowrap;
+}
+.bbox.hot { background: rgb(242 102 90 / 0.22); border-style: solid; }
+.elements { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.elements button { border: 2px solid var(--line); background: var(--card); border-radius: 999px; padding: 0.2rem 0.7rem; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+.elements button:hover, .elements button.on { border-color: var(--coral); color: var(--coral); }
+.section { display: grid; gap: 0.75rem; }
+.section > h3 { display: flex; align-items: center; gap: 0.5rem; }
+.interp { padding: 1rem; border-radius: 16px; border: 2px dashed var(--line-2); display: grid; gap: 0.5rem; }
+.interp ul { margin: 0; padding-inline-start: 1.2rem; color: var(--ink-2); }
+.prompt { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.75rem 0.95rem; border-radius: 16px; background: var(--sky-soft); }
+.prompt strong { font-family: var(--display); font-size: 1.05rem; unicode-bidi: plaintext; }
+.safety-note { padding: 1rem 1.1rem; border-radius: 18px; background: var(--leaf-soft); display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.92rem; }
+.conf { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 700; }
+.conf .meter { display: inline-flex; gap: 3px; }
+.conf .meter i { width: 9px; height: 18px; border-radius: 4px; background: var(--line-2); }
+.conf.high .meter i { background: var(--leaf); }
+.conf.moderate .meter i:nth-child(-n + 2) { background: var(--sun); }
+.conf.low .meter i:first-child { background: var(--coral); }
+.factor { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; }
+.sources li { margin-bottom: 0.4rem; }
+details.explain { border-radius: 16px; border: 1px solid var(--line); background: var(--card-2); }
+details.explain summary { cursor: pointer; padding: 0.8rem 1rem; font-weight: 600; }
+details.explain pre { margin: 0; padding: 0 1rem 1rem; font-size: 0.75rem; max-height: 320px; overflow: auto; direction: ltr; text-align: left; white-space: pre-wrap; }
+
+/* Agent progress */
+.agents { display: grid; gap: 0.55rem; }
+.agent {
+  display: grid; grid-template-columns: 44px 1fr auto; gap: 0.8rem; align-items: center; padding: 0.7rem 0.9rem; border-radius: 18px;
+  background: var(--card); border: 1px solid var(--line); transition: all 0.4s var(--ease);
+}
+.agent .ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--paper-2); color: var(--ink-3); transition: all 0.4s var(--ease); }
+.agent.running { border-color: var(--sun); box-shadow: 0 0 0 4px var(--sun-soft); }
+.agent.running .ic { background: var(--sun); color: #fff; animation: wiggle 0.9s ease-in-out infinite; }
+.agent.done .ic { background: var(--leaf); color: #fff; }
+.agent.todo { opacity: 0.55; }
+.agent .sum { font-size: 0.78rem; color: var(--ink-3); direction: ltr; text-align: start; unicode-bidi: plaintext; }
+
+/* Child mode */
+.kid-mode {
+  position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 1.5rem; overflow-y: auto;
+  background: radial-gradient(circle at 15% 20%, #ffe3a8, transparent 40%), radial-gradient(circle at 85% 80%, #ffc9c2, transparent 45%),
+    radial-gradient(circle at 80% 15%, #c9e6fb, transparent 40%), #fff6e8;
+  color: #2a2420;
+}
+.kid-card-big { width: min(680px, 100%); text-align: center; display: grid; gap: 1.4rem; justify-items: center; animation: pop-in 0.6s var(--ease) both; }
+.kid-card-big .pic { width: min(320px, 70vw); border-radius: 22px; border: 8px solid #fff; box-shadow: var(--shadow-lg); transform: rotate(-2deg); }
+.kid-q { font-family: var(--display); font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1.25; }
+.kid-emoji { font-size: 4rem; animation: bounce 1.6s ease-in-out infinite; }
+.mic {
+  width: 112px; height: 112px; border-radius: 50%; border: none; cursor: pointer; display: grid; place-items: center; color: #fff;
+  background: var(--coral); box-shadow: 0 8px 0 #c94d43, 0 20px 40px -12px rgb(242 102 90 / 0.8); transition: transform 0.2s;
+}
+.mic:active { transform: translateY(4px); box-shadow: 0 4px 0 #c94d43; }
+.mic.on { animation: pulse-ring 1.3s ease-out infinite; background: var(--leaf); box-shadow: 0 8px 0 #2f7d48; }
+.kid-input { font-size: 1.3rem; padding: 0.9rem 1.2rem; border-radius: 20px; border: 3px solid #f0dcc0; width: 100%; text-align: center; background: #fff; color: #2a2420; }
+.kid-input:focus { outline: none; border-color: var(--sky); }
+.kid-dots { display: flex; gap: 0.5rem; }
+.kid-dots i { width: 14px; height: 14px; border-radius: 50%; background: #f0dcc0; transition: all 0.3s; }
+.kid-dots i.on { background: var(--coral); transform: scale(1.25); }
+.kid-dots i.done { background: var(--leaf); }
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
+.confetti i { position: absolute; top: -20px; width: 12px; height: 18px; border-radius: 3px; animation: fall linear forwards; }
+
+/* Upload */
+.drop {
+  display: grid; place-items: center; gap: 0.6rem; text-align: center; padding: 2.4rem 1rem; border-radius: var(--r-wobble); border: 3px dashed var(--line-2);
+  background: var(--card); cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.3s var(--ease);
+}
+.drop:hover, .drop.over { border-color: var(--coral); background: var(--coral-soft); transform: scale(1.01); }
+.drop .ic { width: 64px; height: 64px; border-radius: 20px; display: grid; place-items: center; background: var(--coral); color: #fff; transform: rotate(-6deg); }
+.samples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+.sample { border: 3px solid transparent; border-radius: 16px; overflow: hidden; cursor: pointer; padding: 0; background: var(--paper-2); transition: all 0.25s var(--ease); }
+.sample:hover { transform: rotate(-1deg) scale(1.03); }
+.sample.on { border-color: var(--coral); }
+.sample img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+.preview { border-radius: 20px; overflow: hidden; border: 8px solid var(--card); box-shadow: var(--shadow-lg); transform: rotate(-1.2deg); }
+
+/* Timeline */
+.tl { position: relative; display: grid; gap: 1.4rem; padding-inline-start: 2.2rem; }
+.tl::before { content: ""; position: absolute; inset-inline-start: 0.75rem; top: 0.5rem; bottom: 0.5rem; width: 4px; border-radius: 4px; background: repeating-linear-gradient(to bottom, var(--sun) 0 14px, transparent 14px 22px); }
+.tl-item { position: relative; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 1rem; animation: rise 0.55s var(--ease) both; }
+.tl-item::before { content: ""; position: absolute; inset-inline-start: -1.85rem; top: 1rem; width: 18px; height: 18px; border-radius: 50%; background: var(--coral); border: 4px solid var(--paper); }
+.tl-item .pic { border-radius: 16px; overflow: hidden; border: 5px solid var(--card); box-shadow: var(--shadow); transform: rotate(-1.5deg); }
+.tl-item:nth-child(even) .pic { transform: rotate(1.5deg); }
+.line-chart { width: 100%; height: 170px; overflow: visible; }
+.line-chart .ln { fill: none; stroke: var(--coral); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 1.6s var(--ease) forwards; }
+.line-chart .pt { fill: var(--card); stroke: var(--coral); stroke-width: 3.5; }
+.line-chart .grid { stroke: var(--line); stroke-dasharray: 4 6; }
+.line-chart text { fill: var(--ink-3); font-size: 11px; font-family: var(--body); }
+
+/* Ask */
+.chat { display: grid; grid-template-rows: 1fr auto; height: min(68vh, 680px); }
+.chat-msgs { overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; padding: 0.5rem 0.2rem 1rem; }
+.msg { max-width: 82%; padding: 0.8rem 1.05rem; border-radius: 20px; white-space: pre-wrap; unicode-bidi: plaintext; animation: rise 0.4s var(--ease) both; }
+.msg.user { align-self: flex-end; background: var(--coral); color: #fff; border-end-end-radius: 6px; }
+.msg.assistant { align-self: flex-start; background: var(--card); border: 1px solid var(--line); border-end-start-radius: 6px; box-shadow: var(--shadow); }
+.cites { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.cites a { text-decoration: none; }
+.composer { display: flex; gap: 0.5rem; padding-top: 0.8rem; border-top: 1px solid var(--line); }
+.typing { display: inline-flex; gap: 5px; }
+.typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); animation: hop 1s infinite; }
+.typing i:nth-child(2) { animation-delay: 0.15s; } .typing i:nth-child(3) { animation-delay: 0.3s; }
+
+/* Auth */
+.auth { min-height: 100vh; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(1.5rem, 5vw, 4.5rem); align-items: center; padding: 2rem clamp(1rem, 5vw, 5rem); max-width: 1280px; margin: 0 auto; }
+.hero h1 { font-size: clamp(2.4rem, 5.5vw, 4.3rem); line-height: 1.1; }
+.hero h1 em { font-style: normal; color: var(--coral); display: block; }
+.hero .lead { font-size: 1.12rem; color: var(--ink-2); max-width: 34rem; margin-top: 1rem; }
+.points { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.points li { display: flex; gap: 0.5rem; align-items: center; font-weight: 600; animation: rise 0.6s var(--ease) both; }
+.points li .icon { color: var(--leaf); }
+.points li:nth-child(2) { animation-delay: 0.08s; } .points li:nth-child(3) { animation-delay: 0.16s; } .points li:nth-child(4) { animation-delay: 0.24s; }
+.collage { position: relative; height: 230px; margin-top: 2rem; }
+.collage img { position: absolute; width: 46%; border-radius: 16px; border: 7px solid var(--card); box-shadow: var(--shadow-lg); animation: float-in 0.9s var(--ease) both; }
+.collage img:nth-child(1) { inset-inline-start: 0; top: 10px; transform: rotate(-6deg); }
+.collage img:nth-child(2) { inset-inline-start: 27%; top: 40px; transform: rotate(3deg); z-index: 2; animation-delay: 0.15s; }
+.collage img:nth-child(3) { inset-inline-start: 54%; top: 0; transform: rotate(-2deg); animation-delay: 0.3s; }
+.auth-card { padding: 2rem; display: grid; gap: 1rem; animation: pop-in 0.7s var(--ease) 0.1s both; }
+.auth-card .demo { display: grid; gap: 0.5rem; padding-top: 1rem; border-top: 1px dashed var(--line-2); }
+
+/* Modal */
+.backdrop { position: fixed; inset: 0; z-index: 40; background: rgb(42 36 32 / 0.4); backdrop-filter: blur(4px); display: grid; place-items: center; padding: 1rem; animation: fade 0.25s both; }
+.modal { width: min(560px, 100%); max-height: 92vh; overflow-y: auto; background: var(--card); border-radius: var(--r-wobble); padding: 1.6rem; box-shadow: var(--shadow-lg); animation: pop-in 0.45s var(--ease) both; display: grid; gap: 1rem; }
+
+.empty { text-align: center; padding: 3rem 1rem; display: grid; justify-items: center; gap: 0.8rem; color: var(--ink-2); }
+.empty .art { font-size: 3.2rem; animation: bounce 2s ease-in-out infinite; }
+.skeleton { background: linear-gradient(100deg, var(--paper-2) 30%, var(--card-2) 50%, var(--paper-2) 70%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; border-radius: 16px; }
+.spinner { width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--line-2); border-top-color: var(--coral); animation: spin 0.8s linear infinite; display: inline-block; }
+.toast { position: fixed; bottom: 1.5rem; inset-inline-start: 50%; transform: translateX(-50%); z-index: 70; background: var(--ink); color: var(--paper); padding: 0.7rem 1.2rem; border-radius: 999px; animation: rise 0.35s var(--ease) both; box-shadow: var(--shadow-lg); }
+[dir="rtl"] .toast { transform: translateX(50%); }
+table.list { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.list th, table.list td { text-align: start; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); }
+table.list th { color: var(--ink-3); font-weight: 600; font-size: 0.8rem; }
+
+/* Motion */
+@keyframes page-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop-in { from { opacity: 0; transform: scale(0.94) translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes float-in { from { opacity: 0; translate: 0 30px; } to { opacity: 1; translate: 0 0; } }
+@keyframes grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes wiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes hop { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgb(68 166 99 / 0.6), 0 8px 0 #2f7d48; } 100% { box-shadow: 0 0 0 30px rgb(68 166 99 / 0), 0 8px 0 #2f7d48; } }
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .line-chart .ln { stroke-dashoffset: 0; }
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .report-grid { grid-template-columns: minmax(0, 1fr); }
+  .sticky { position: static; }
+}
+@media (max-width: 860px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .side { display: none; }
+  .mobile-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; position: sticky; top: 0; z-index: 20; background: rgb(255 248 238 / 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .bottom-nav { display: grid; grid-auto-flow: column; position: fixed; bottom: 0; inset-inline: 0; z-index: 20; background: var(--card); border-top: 1px solid var(--line); padding: 0.4rem 0.4rem calc(0.4rem + env(safe-area-inset-bottom)); }
+  .bottom-nav a { display: grid; justify-items: center; gap: 0.1rem; font-size: 0.7rem; text-decoration: none; color: var(--ink-3); font-weight: 600; padding: 0.3rem; border-radius: 12px; }
+  .bottom-nav a.active { color: var(--coral); }
+  .main { padding: 1.2rem 1rem 6rem; }
+  .auth { grid-template-columns: minmax(0, 1fr); padding-top: 1.5rem; }
+  .collage { display: none; }
+  .grid-2, .grid-3 { grid-template-columns: minmax(0, 1fr); }
+  .tl-item { grid-template-columns: minmax(0, 1fr); }
+  .tl-item .pic { max-width: 260px; }
+}
+@media (prefers-color-scheme: dark) and (max-width: 860px) { .mobile-bar { background: rgb(26 22 19 / 0.85); } }
+@media (max-width: 560px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .points { grid-template-columns: minmax(0, 1fr); }
+  .samples { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+  .msg { max-width: 92%; }
+  .hbar { grid-template-columns: 90px 1fr 24px; }
+}
+</style><style>.demo-ribbon{position:fixed;z-index:2147483647;inset-inline:0;bottom:0;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;padding:8px 14px;background:#111827;color:#fff;font:500 13px/1.5 system-ui,"Segoe UI",Tahoma,sans-serif}.demo-ribbon a{color:#5eead4}body{padding-bottom:44px!important}[data-demo-disabled]{cursor:not-allowed}</style></head>
+  <body><div class="demo-ribbon" dir="rtl">نسخة عرض ثابتة من رِسام ببيانات تجريبية · رفع الرسمات وتحليلها الحي يحتاج تشغيل المشروع · <a href="https://github.com/SadeemAi/rissam">الكود على GitHub</a></div>
+    <div id="root"><div class="shell"><aside class="side"><a class="brand" href="dashboard.html" data-discover="true"><svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#f2665a" transform="rotate(-6 32 32)"></rect><path d="M18 40c4-14 12-22 22-24 6-1 8 4 4 8-5 5-14 6-14 12 0 5 7 6 12 4" fill="none" stroke="#fff8ee" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="46" cy="44" r="5" fill="#f7b731"></circle></svg><div><strong>رِسام</strong><small>ولي أمر</small></div></a><nav class="nav"><a class="" href="dashboard.html" data-discover="true"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9z"></path></svg>الرئيسية</a><a class="" href="children.html" data-discover="true"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5M16.5 11a2.5 2.5 0 1 0 0-5M17 15c2 .4 3.5 2 4 5"></path></svg>الأطفال</a><a class="" href="lab.html" data-discover="true"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7.5 15h9"></path></svg>المختبر</a><a class="" href="settings.html" data-discover="true"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>الإعدادات</a></nav><div class="side-kids"><span class="label">الأطفال</span><a class="side-kid " href="child-1.html" data-discover="true"><span class="avatar sm" aria-hidden="true" style="--h: 330;">س</span><span>سارة</span></a><a class="side-kid " href="child-2.html" data-discover="true"><span class="avatar sm" aria-hidden="true" style="--h: 200;">ع</span><span>عمر</span></a></div><div class="side-foot"><div class="who"><span class="avatar sm" aria-hidden="true" style="--h: 24;">ن</span><div><strong class="small">نورة العتيبي</strong><span class="tiny faint ltr">demo@rissam.app</span></div></div><button class="btn ghost sm" style="justify-content: flex-start;"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"></path></svg> تسجيل الخروج</button></div></aside><header class="mobile-bar"><a class="brand" href="dashboard.html" data-discover="true"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#f2665a" transform="rotate(-6 32 32)"></rect><path d="M18 40c4-14 12-22 22-24 6-1 8 4 4 8-5 5-14 6-14 12 0 5 7 6 12 4" fill="none" stroke="#fff8ee" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="46" cy="44" r="5" fill="#f7b731"></circle></svg><strong>رِسام</strong></a><button class="btn icon ghost" aria-label="تسجيل الخروج"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"></path></svg></button></header><main class="main"><div class="stack-lg"><div class="page-head"><div><a class="btn ghost sm" href="child-1.html" data-discover="true">→ رجوع</a><h1 class="plain" style="margin-top: 0.4rem;">قطوة الحديقة</h1><p class="muted small">7 يونيو 2026</p></div><div class="row"><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span><span class="chip sun"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l2 2 4-4M5 4h14v16H5zM9 17h6"></path></svg> تحتاج مراجعة مختص</span></div></div><div class="report-grid"><div class="stack sticky"><div class="drawing-frame"><img alt="قطوة الحديقة" src="assets/e94827b7a455.bin"><div class="bbox " style="left: 3.1%; top: 3%; width: 18.8%; height: 25.1%; opacity: 0.55;"></div><div class="bbox " style="left: 44.5%; top: 6.2%; width: 38.5%; height: 15.1%; opacity: 0.55;"></div><div class="bbox " style="left: 0%; top: 82.2%; width: 100%; height: 4.4%; opacity: 0.55;"></div><div class="bbox " style="left: 10.7%; top: 72.4%; width: 83.7%; height: 13.1%; opacity: 0.55;"></div><div class="bbox " style="left: 34.7%; top: 58.2%; width: 17.2%; height: 27.3%; opacity: 0.55;"></div><div class="bbox " style="left: 55.7%; top: 69.8%; width: 18.5%; height: 15.8%; opacity: 0.55;"></div></div><div class="card stack" style="gap: 0.7rem;"><div class="between"><h3>العناصر المرسومة</h3><label class="row small"><input type="checkbox" checked=""> أظهر العناصر على الرسمة</label></div><div class="elements"><button class="">شمس</button><button class="">غيمة ×2</button><button class="">عشب</button><button class="">وردة ×4</button><button class="">الطفل نفسه</button><button class="">قطة</button></div></div><div class="card stack" style="gap: 0.5rem;"><div class="between"><h3>مستوى الثقة</h3><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div><div class="factor"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg><span class="">الصورة واضحة بما يكفي للتحليل</span></div><div class="factor"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg><span class="">تم التعرف على عناصر الرسمة</span></div><div class="factor"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg><span class="muted">وصف الطفل مختصر</span></div><div class="factor"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg><span class="muted">عدد الرسومات السابقة للمقارنة قليل (2)</span></div><div class="factor"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg><span class="">اجتاز مراجعة السلامة</span></div></div></div><div class="stack-lg"><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"></path></svg><span class="scribble">ماذا في الرسمة</span></h3><p class="plain">تتضمن الرسمة: الطفل نفسه، شمس، 2 غيمة، عشب، 4 وردة وقطة.</p><p class="plain">أكثر الألوان استخدامًا: بيج، رمادي وبني.</p><div class="row" style="gap: 0.35rem;"><span class="chip sun">الطبيعة</span><span class="chip sky">الحيوانات<b> · جديد</b></span><span class="chip leaf">الذات<b> · جديد</b></span></div></section><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"></path></svg><span class="scribble">بكلمات سارة</span></h3><div class="stack" style="gap: 0.2rem;"><span class="small muted plain">وش رسمت اليوم؟ </span><div class="quote">قطوة جيراننا اسمها لولو</div></div><div class="stack" style="gap: 0.2rem;"><span class="small muted plain">وش أكثر شي يعجبك في رسمتك؟ </span><div class="quote">الورد الوردي</div></div></section><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"></path></svg><span class="scribble">ملاحظات</span></h3><div class="obs "><div class="between"><div class="row"><span class="chip leaf">من كلام الطفل</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">بكلمات الطفل نفسه: «قطوة جيراننا اسمها لولو».</span><span class="small muted plain">“قطوة جيراننا اسمها لولو”</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div><div class="obs "><div class="between"><div class="row"><span class="chip plum">نمط</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">«الطبيعة» موضوع سبق أن رسمه الطفل.</span><span class="small muted plain">↺ مواضيع متكررة عبر الرسومات: الطبيعة.</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div><div class="obs "><div class="between"><div class="row"><span class="chip plum">نمط</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">يظهر عنصر «شمس» في 3 من آخر 3 رسومات.</span><span class="small muted plain">↺ 3/3</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div></section><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M7 8v8M12 6v12M17 9v6"></path></svg><span class="scribble">ماذا تغيّر مع الوقت</span></h3><div class="obs "><div class="between"><div class="row"><span class="chip sun">تغيّر</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">عدد الأشخاص المرسومين في آخر 3 رسومات: 3 → 3 → 1.</span><span class="small muted plain">↺ عدد الأشخاص المرسومين في آخر 3 رسومات: 3 → 3 → 1.</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div><div class="obs "><div class="between"><div class="row"><span class="chip sun">تغيّر</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">مستوى التفاصيل البصرية عبر الوقت: مرتفع → مرتفع → متوسط.</span><span class="small muted plain">↺ مستوى التفاصيل البصرية عبر الوقت: مرتفع → مرتفع → متوسط.</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div><div class="obs "><div class="between"><div class="row"><span class="chip sun">تغيّر</span><span class="conf moderate"><span class="meter"><i></i><i></i><i></i></span>ثقة متوسطة</span></div></div><span class="text">يظهر موضوع جديد مقارنة بالرسومات السابقة: الحيوانات والذات.</span><span class="small muted plain">↺ الحيوانات والذات</span><div class="row" style="gap: 0.2rem;"><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v9H4v-9h3zM7 11l4-8a2 2 0 0 1 2 2v4h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 19H7"></path></svg> مفيدة</button><button class="btn sm ghost"><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V4h3v9h-3zM17 13l-4 8a2 2 0 0 1-2-2v-4H6a2 2 0 0 1-2-2.3l1.2-6A2 2 0 0 1 7.2 5H17"></path></svg> غير دقيقة</button></div></div><p class="small muted plain">✦ عدد الأشخاص المرسومين في آخر 3 رسومات: 3 → 3 → 1.</p></section><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"></path></svg><span class="scribble">احتمالات (ليست استنتاجات)</span></h3><div class="interp"><b class="plain">قد يعكس الموضوع الجديد (الحيوانات والذات) شيئًا حاضرًا في أيام الطفل أو اهتماماته الحالية.</b><span class="small faint">تفسيرات أخرى ممكنة</span><ul><li class="plain">قد يكون مستوحى من قصة أو برنامج أو نشاط مدرسي.</li><li class="plain">قد يكون اختيارًا عابرًا دون دلالة خاصة.</li></ul></div></section><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg><span class="scribble">أسئلة تقدر تسألها</span></h3><div class="prompt"><span aria-hidden="true" style="font-size: 1.3rem;">💬</span><div><strong>وش يسوي كل واحد في رسمتك؟</strong><p class="small muted plain">يدعو الطفل لسرد قصة عن الأشخاص بكلماته.</p></div></div><div class="prompt"><span aria-hidden="true" style="font-size: 1.3rem;">💬</span><div><strong>احكي لي عن شمس، هل هو مكان تعرفه؟</strong><p class="small muted plain">يربط الرسمة بأماكن الطفل وذكرياته الحقيقية.</p></div></div><div class="prompt"><span aria-hidden="true" style="font-size: 1.3rem;">💬</span><div><strong>وش صار قبل هذي اللحظة في رسمتك؟</strong><p class="small muted plain">الأسئلة القصصية تساعد الطفل على قول أكثر من نعم أو لا.</p></div></div><div class="prompt"><span aria-hidden="true" style="font-size: 1.3rem;">💬</span><div><strong>وش أكثر جزء تحبه في الرسمة؟ وليش؟</strong><p class="small muted plain">يحافظ على حوار إيجابي يقوده الطفل.</p></div></div></section><section class="section"><h3><svg class="icon dir" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg><span class="scribble">خطوات مقترحة</span></h3><p class="plain">• هذا التحليل مُعلَّم للمراجعة، ويمكن لمختص في فريقك إضافة ملاحظة.</p><p class="plain">• إذا كانت لديك مخاوف مستمرة بشأن صحة طفلك النفسية — من الحياة اليومية وليس من الرسم وحده — فقد يفيدك التحدث مع مختص مؤهل.</p></section><div class="safety-note"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3zM9 12l2 2 4-4"></path></svg><span class="plain">يقدّم رِسام ملاحظات وليس تشخيصًا. الرسم وحده لا يكفي لتقييم الحالة النفسية للطفل أو تشخيصها. تختلف رسومات الأطفال لأسباب عادية كثيرة، مثل مزاج ذلك اليوم، والوقت، والأدوات، وما شاهدوه مؤخرًا.</span></div><section class="section"><h3><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5zM19 19v2H6"></path></svg><span class="scribble">المصادر</span></h3><ol class="sources small muted ltr" style="text-align: start;"><li><b>Looking at drawings over time rather than one at a time</b><br>Malchiodi, C. A. (1998). Understanding Children's Drawings. Guilford Press. — Jolley, R. P. (2010). Children and Pictures: Drawing and Understanding. Wiley-Blackwell.</li><li><b>Limits of interpreting children's drawings as psychological tests</b><br>Thomas, G. V., &amp; Jolley, R. P. (1998). Drawing conclusions: A re-examination of empirical and conceptual bases for psychological evaluation of children from their drawings. British Journal of Clinical Psychology, 37(2), 127–139. — Lilienfeld, S. O., Wood, J. M., &amp; Garb, H. N. (2000). The scientific status of projective techniques. Psychological Science in the Public Interest, 1(2), 27–66.</li><li><b>What color choice in children's drawings can and cannot tell us</b><br>Burkitt, E., Barrett, M., &amp; Davis, A. (2003). Children's colour choices for completing drawings of affectively characterised topics. Journal of Child Psychology and Psychiatry, 44(3), 445–455.</li></ol></section><details class="explain"><summary>كيف وصلنا لهذا؟</summary><div style="padding: 0px 1rem 1rem;"><div class="agents"><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>الرؤية</b><div class="small muted">يشوف وش في الرسمة</div><div class="sum">6 element types, 1 people, 3 colors</div></div><span class="chip tiny">fixture · 264ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>السياق</b><div class="small muted">يسمع كلام الطفل</div><div class="sum">sufficiency=brief, 2 quotes</div></div><span class="chip tiny">rules · 1ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>التاريخ</b><div class="small muted">يقارن مع الرسومات السابقة</div><div class="sum">2 previous drawings, 2 changes</div></div><span class="chip tiny">compute · 1ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>المعرفة</b><div class="small muted">يراجع المصادر العلمية</div><div class="sum">8 passages from 6 sources</div></div><span class="chip tiny">rag · 202ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>الاستنتاج</b><div class="small muted">يكتب الملاحظات</div><div class="sum">8 observations, 1 interpretations</div></div><span class="chip tiny">rules · 3ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>السلامة</b><div class="small muted">يتأكد من لطف اللغة وسلامتها</div><div class="sum">0 flags (0 blocked), abstained=False</div></div><span class="chip tiny">rules · 1ms</span></div><div class="agent done"><span class="ic"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span><div><b>التقرير</b><div class="small muted">يجهّز التقرير</div><div class="sum">confidence=moderate, review_required=True</div></div><span class="chip tiny">compose · 2ms</span></div></div></div><pre>{
+  "vision": {
+    "elements": [
+      {
+        "key": "sun",
+        "count": 1,
+        "position": "top-left",
+        "relative_size": "medium",
+        "bbox": {
+          "x": 0.031,
+          "y": 0.03,
+          "w": 0.188,
+          "h": 0.251
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": [
+          "smiling face"
+        ]
+      },
+      {
+        "key": "cloud",
+        "count": 2,
+        "position": "top-center",
+        "relative_size": "medium",
+        "bbox": {
+          "x": 0.445,
+          "y": 0.062,
+          "w": 0.385,
+          "h": 0.151
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": []
+      },
+      {
+        "key": "grass",
+        "count": 1,
+        "position": "bottom-center",
+        "relative_size": "medium",
+        "bbox": {
+          "x": 0,
+          "y": 0.822,
+          "w": 1,
+          "h": 0.044
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": []
+      },
+      {
+        "key": "flower",
+        "count": 4,
+        "position": "bottom-center",
+        "relative_size": "medium",
+        "bbox": {
+          "x": 0.107,
+          "y": 0.724,
+          "w": 0.837,
+          "h": 0.131
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": []
+      },
+      {
+        "key": "self",
+        "count": 1,
+        "position": "bottom-center",
+        "relative_size": "medium",
+        "bbox": {
+          "x": 0.347,
+          "y": 0.582,
+          "w": 0.172,
+          "h": 0.273
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": [
+          "smiling face",
+          "arm stretched toward the cat"
+        ]
+      },
+      {
+        "key": "cat",
+        "count": 1,
+        "position": "bottom-center",
+        "relative_size": "small",
+        "bbox": {
+          "x": 0.557,
+          "y": 0.698,
+          "w": 0.185,
+          "h": 0.158
+        },
+        "confidence": 0.95,
+        "source": "fixture",
+        "attributes": []
+      }
+    ],
+    "people_count": 1,
+    "environment": "outdoor",
+    "spatial_relationships": [
+      "one figure stands to the left of a cat",
+      "flowers grow along both edges of the page"
+    ],
+    "composition_notes": [
+      "the ground line is drawn near the bottom",
+      "the sky area holds the sun and two clouds"
+    ],
+    "ambiguities": [],
+    "semantic_detection": true
+  },
+  "cv": {
+    "size": {
+      "width": 1200,
+      "height": 900
+    },
+    "coverage": 0.066,
+    "palette": [
+      {
+        "color": "beige",
+        "hex": "#dedbb2",
+        "pct": 0.362
+      },
+      {
+        "color": "gray",
+        "hex": "#83a986",
+        "pct": 0.321
+      },
+      {
+        "color": "brown",
+        "hex": "#a36156",
+        "pct": 0.31
+      }
+    ],
+    "color_count": 3,
+    "grid_density": [
+      [
+        0.121,
+        0.044,
+        0.034
+      ],
+      [
+        0,
+        0.022,
+        0
+      ],
+      [
+        0.091,
+        0.152,
+        0.135
+      ]
+    ],
+    "empty_regions": [
+      "middle-left",
+      "middle-right"
+    ],
+    "center_of_mass": {
+      "x": 0.46,
+      "y": 0.576
+    },
+    "edge_density": 0.0433,
+    "complexity": "medium",
+    "quality": {
+      "ok": true,
+      "issues": [],
+      "sharpness": 914.2
+    }
+  },
+  "context": {
+    "summary": "وصف الطفل رسمته بقوله: «قطوة جيراننا اسمها لولو»",
+    "mentioned_people": [],
+    "mentioned_elements": [],
+    "stated_activity": null,
+    "feeling_words": [],
+    "quotes": [
+      "قطوة جيراننا اسمها لولو",
+      "الورد الوردي"
+    ],
+    "sufficiency": "brief",
+    "agreement_with_drawing": []
+  },
+  "history": {
+    "previous_count": 2,
+    "sufficient_history": true,
+    "recurring_themes": [
+      "nature"
+    ],
+    "new_themes": [
+      "animals",
+      "self"
+    ],
+    "absent_themes": [
+      "home"
+    ],
+    "recurring_elements": [
+      {
+        "key": "sun",
+        "appearances": 3,
+        "of": 3
+      },
+      {
+        "key": "grass",
+        "appearances": 3,
+        "of": 3
+      }
+    ],
+    "changes": [
+      {
+        "metric": "people_count",
+        "series": [
+          3,
+          3,
+          1
+        ],
+        "direction": "decrease",
+        "statement": "عدد الأشخاص المرسومين في آخر 3 رسومات: 3 → 3 → 1."
+      },
+      {
+        "metric": "complexity",
+        "series": [
+          "high",
+          "high",
+          "medium"
+        ],
+        "direction": "decrease",
+        "statement": "مستوى التفاصيل البصرية عبر الوقت: مرتفع → مرتفع → متوسط."
+      }
+    ],
+    "statements": [
+      "مواضيع متكررة عبر الرسومات: الطبيعة.",
+      "مواضيع جديدة لم تظهر في الرسومات السابقة: الحيوانات والذات.",
+      "مواضيع تكررت مؤخرًا ولم تظهر في هذه الرسمة: البيت.",
+      "ظهر عنصر «شمس» في 3 من آخر 3 رسومات.",
+      "عدد الأشخاص المرسومين في آخر 3 رسومات: 3 → 3 → 1."
+    ]
+  },
+  "knowledge": {
+    "queries": [
+      "limitations of interpreting children's drawings; projective drawing validity; single drawing not diagnostic",
+      "color choice in children's drawings meaning evidence",
+      "preschematic stage drawing development ages 4 to 7 tadpole figures",
+      "omission of family members in drawings multiple explanations",
+      "drawing and talking helps children communicate verbal reports",
+      "longitudinal change across multiple drawings over time"
+    ],
+    "passages": [
+      {
+        "source_id": "1056b49d-b0e2-42bb-8851-817ababfb8c9",
+        "slug": "limits-projective-drawings",
+        "title": "Limits of interpreting children's drawings as psychological tests",
+        "citation": "Thomas, G. V., &amp; Jolley, R. P. (1998). Drawing conclusions: A re-examination of empirical and conceptual bases for psychological evaluation of children from their drawings. British Journal of Clinical Psychology, 37(2), 127–139. — Lilienfeld, S. O., Wood, J. M., &amp; Garb, H. N. (2000). The scientific status of projective techniques. Psychological Science in the Public Interest, 1(2), 27–66.",
+        "heading": "Single drawings and individual signs",
+        "text": "Reviews of the research conclude that individual \"signs\" in a drawing — such as a missing figure, a small figure, shading, or a particular color — have weak and inconsistent links to emotional states or clinical conditions. A single drawing is not a valid basis for assessing a child. Limitations of interpreting children's drawings; projective drawing validity; a single drawing is not diagnostic.",
+        "score": 0.807
+      },
+      {
+        "source_id": "0d23906b-561c-4ceb-a1d7-07810c897413",
+        "slug": "drawing-facilitates-talk",
+        "title": "Drawing and talking — how drawing helps children communicate",
+        "citation": "Gross, J., &amp; Hayne, H. (1998). Drawing facilitates children's verbal reports of emotionally laden events. Journal of Experimental Psychology: Applied, 4(2), 163–179. — Driessnack, M. (2005). Children's drawings as facilitators of communication: A meta-analysis. Journal of Pediatric Nursing, 20(6), 415–423.",
+        "heading": "Drawing and talking helps children communicate verbal reports",
+        "text": "Studies show that children who draw while talking about an experience often say more than children who only talk. A meta-analysis found drawing has a moderate positive effect on how much children communicate.",
+        "score": 0.748
+      },
+      {
+        "source_id": "09d24c44-7d8e-44e2-92ae-0a4af5d7e1dc",
+        "slug": "color-use-evidence",
+        "title": "What color choice in children's drawings can and cannot tell us",
+        "citation": "Burkitt, E., Barrett, M., &amp; Davis, A. (2003). Children's colour choices for completing drawings of affectively characterised topics. Journal of Child Psychology and Psychiatry, 44(3), 445–455.",
+        "heading": "Color choice in children's drawings: meaning and evidence",
+        "text": "Experimental studies show children may choose colors differently when explicitly asked to draw something described as nice or nasty, and they have personal color preferences. This does not mean a color in a free drawing carries a fixed emotional meaning. Children also choose colors based on what is available, what is realistic (green grass, blue sky), habit, and preference.",
+        "score": 0.728
+      },
+      {
+        "source_id": "57b5b26e-1187-4b0d-9c21-54d63852fa9d",
+        "slug": "family-drawings-context",
+        "title": "Family drawings — why figures, sizes and omissions vary",
+        "citation": "Cox, M. V. (2005). The Pictorial World of the Child. Cambridge University Press. — Jolley, R. P. (2010). Children and Pictures: Drawing and Understanding. Wiley-Blackwell.",
+        "heading": "Omission of family members in drawings multiple explanations",
+        "text": "Leaving out a family member can reflect running out of space or time, drawing a specific moment (who was home), focusing on one relationship, or simple preference. Omission should not be treated as evidence of a problem without other context; the most useful next step is to ask the child about the drawing.",
+        "score": 0.641
+      },
+      {
+        "source_id": "fecd3191-5718-46aa-8eea-82d32da6923a",
+        "slug": "drawing-development-stages",
+        "title": "Age-related development of children's drawing",
+        "citation": "Lowenfeld, V., &amp; Brittain, W. L. (1987). Creative and Mental Growth (8th ed.). Macmillan. — Kellogg, R. (1969). Analyzing Children's Art. National Press Books. — Luquet, G.-H. (2001). Children's Drawings (A. Costall, Trans.). Free Association Books. (Original work published 1927)",
+        "heading": "Preschematic stage drawing development ages 4 to 7 tadpole figures",
+        "text": "Children begin drawing recognizable people, often \"tadpole\" figures (a head with legs). Objects may float on the page, sizes are based on importance or interest rather than realism, and colors are often chosen freely.",
+        "score": 0.632
+      },
+      {
+        "source_id": "4856e5b1-9194-4e66-bbb1-38065fc8d08d",
+        "slug": "longitudinal-observation",
+        "title": "Looking at drawings over time rather than one at a time",
+        "citation": "Malchiodi, C. A. (1998). Understanding Children's Drawings. Guilford Press. — Jolley, R. P. (2010). Children and Pictures: Drawing and Understanding. Wiley-Blackwell.",
+        "heading": "Longitudinal change across multiple drawings over time",
+        "text": "A series of drawings collected over weeks or months, together with the child's descriptions, offers more context than any single drawing. Recurring subjects often reflect ordinary interests, practiced schemas, or current events in the child's life.",
+        "score": 0.63
+      },
+      {
+        "source_id": "1056b49d-b0e2-42bb-8851-817ababfb8c9",
+        "slug": "limits-projective-drawings",
+        "title": "Limits of interpreting children's drawings as psychological tests",
+        "citation": "Thomas, G. V., &amp; Jolley, R. P. (1998). Drawing conclusions: A re-examination of empirical and conceptual bases for psychological evaluation of children from their drawings. British Journal of Clinical Psychology, 37(2), 127–139. — Lilienfeld, S. O., Wood, J. M., &amp; Garb, H. N. (2000). The scientific status of projective techniques. Psychological Science in the Public Interest, 1(2), 27–66.",
+        "heading": "What drawings can offer",
+        "text": "Drawings are better used as a starting point for conversation and as one source of context among many (the child's own explanation, everyday behavior, family and school information), rather than as a test. Observations should be framed as hypotheses that need other evidence.",
+        "score": 0.538
+      },
+      {
+        "source_id": "09d24c44-7d8e-44e2-92ae-0a4af5d7e1dc",
+        "slug": "color-use-evidence",
+        "title": "What color choice in children's drawings can and cannot tell us",
+        "citation": "Burkitt, E., Barrett, M., &amp; Davis, A. (2003). Children's colour choices for completing drawings of affectively characterised topics. Journal of Child Psychology and Psychiatry, 44(3), 445–455.",
+        "heading": "Practice point",
+        "text": "Color alone should never be used to infer a child's feelings. Dark colors are frequently chosen for ordinary reasons — the marker that works, outlining, or realism.",
+        "score": 0.525
+      }
+    ]
+  },
+  "safety": {
+    "passed": true,
+    "flags": [],
+    "abstained": false,
+    "judge": "rules"
+  }
+}</pre></details></div></div><div class="row"><button class="btn secondary"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3"></path></svg> اسأل الطفل الآن</button><button class="btn ghost"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"></path></svg> إعادة التحليل</button><button class="btn ghost" style="margin-inline-start: auto;"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg> حذف الرسمة</button></div></div></main><nav class="bottom-nav"><a class="" href="dashboard.html" data-discover="true"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9z"></path></svg>الرئيسية</a><a class="" href="children.html" data-discover="true"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5M16.5 11a2.5 2.5 0 1 0 0-5M17 15c2 .4 3.5 2 4 5"></path></svg>الأطفال</a><a class="" href="lab.html" data-discover="true"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3M7.5 15h9"></path></svg>المختبر</a><a class="" href="settings.html" data-discover="true"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>الإعدادات</a></nav></div></div>
+    
+  
+
+<script>document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var t=b.textContent.trim();var m={"جرّب الحساب التجريبي":"dashboard.html","تجربة كمختص":"reviews.html"};for(var k in m){if(t.indexOf(k)!==-1){e.preventDefault();location.href=m[k];return;}}});</script></body></html>
