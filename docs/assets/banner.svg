@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="300" viewBox="0 0 1280 300" role="img" aria-label="Sadeem Aljufran, AI Engineer: agentic AI and computer vision. Open to entry-level AI Engineer roles in Riyadh.">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="40%" r="55%">
+      <stop offset="0" stop-color="#0d9488" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#0d9488" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="8%" cy="95%" r="40%">
+      <stop offset="0" stop-color="#c2410c" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#c2410c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#0d1117" stroke-opacity=".06" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="gridMask"><rect width="1280" height="300" fill="url(#fade)"/></mask>
+  </defs>
+
+  <rect width="1280" height="300" rx="24" fill="#f7f5f0"/>
+  <rect width="1280" height="300" rx="24" fill="url(#grid)" mask="url(#gridMask)"/>
+  <rect width="1280" height="300" rx="24" fill="url(#glow)"/>
+  <rect width="1280" height="300" rx="24" fill="url(#warm)"/>
+  <rect x=".5" y=".5" width="1279" height="299" rx="23.5" fill="none" stroke="#0d1117" stroke-opacity=".09"/>
+
+  <!-- agent graph motif -->
+  <g stroke="#0f766e" stroke-opacity=".55" stroke-width="1.5" fill="none">
+    <path d="M940 150 L1040 92 M940 150 L1040 208 M1040 92 L1140 150 M1040 208 L1140 150 M1040 92 L1040 208 M1140 150 L1210 150"/>
+  </g>
+  <g fill="#f7f5f0" stroke="#0f766e" stroke-width="2">
+    <circle cx="940" cy="150" r="13"/><circle cx="1040" cy="92" r="11"/><circle cx="1040" cy="208" r="11"/><circle cx="1140" cy="150" r="13"/>
+  </g>
+  <circle cx="1210" cy="150" r="9" fill="#c2410c"/>
+  <g font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#0f766e">
+    <text x="900" y="186">planner</text><text x="1012" y="74">vision</text><text x="1012" y="240">retrieval</text><text x="1118" y="186">safety</text>
+  </g>
+
+  <g font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+    <text x="64" y="74" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" letter-spacing="2.5" fill="#6b7280">HI, I'M SADEEM ALJUFRAN</text>
+    <text x="62" y="150" font-size="68" font-weight="700" letter-spacing="-2.5" fill="#0d1117">AI Engineer</text>
+    <text x="64" y="196" font-size="24" fill="#3a4250">Agentic AI &amp; computer vision. I turn models into products people use.</text>
+    <g transform="translate(64 226)">
+      <rect width="392" height="36" rx="18" fill="#0f766e" fill-opacity=".09" stroke="#0f766e" stroke-opacity=".3"/>
+      <circle cx="20" cy="18" r="4.5" fill="#0d9488"/>
+      <text x="34" y="23.5" font-size="15" font-weight="600" fill="#0f766e">Open to entry-level AI Engineer roles · Riyadh</text>
+    </g>
+  </g>
+</svg>
